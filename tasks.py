@@ -97,8 +97,9 @@ word_frequencies = {word: count for word, count in word_frequencies.items() if c
 # -----------------------------------------------
 def token_counts(string: str, k: int = 1) -> dict:
     tokens = [word.strip("!.,?;:'\"").lower() for word in string.split()]
-    word_frequencies = {word: tokens.count(word) for word in set(tokens) if tokens.count(word) > k}
-    return word_frequencies
+    word_freq = {word: tokens.count(word) for word in set(tokens)}
+    filtered = {word: freq for word, freq in word_freq.items() if freq >= k}
+    return filtered
 
 # test:
 text_hist = {'the': 2, 'quick': 1, 'brown': 1, 'fox': 1, 'jumps': 1, 'over': 1, 'lazy': 1, 'dog': 1}
